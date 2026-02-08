@@ -57,7 +57,16 @@ def convert_markdown_to_html(markdown: str) -> str:
 def finish_page(math_html):
     with open("base.css", "r") as fd:
         css = fd.read()
-    return f'<html><head><style>{css}</style></head><body class="theme-default adaptive">{math_html}</body>'
+    return f'''
+        <!DOCTYPE html>
+        <html lang="en" class="theme-default adaptive">
+            <meta charset="UTF-8" />
+            <head>
+                <style>{css}</style>
+            </head>
+            <body>{math_html}</body>
+        </html>
+    '''
 
 
 def main():

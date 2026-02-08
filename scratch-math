@@ -7,7 +7,12 @@ infile="$1"
 outfile="$(mktemp).html"
 
 cat "$infile" | uv run main.py > $outfile
-xdg-open "$outfile"
+
+if [[ "$(uname)" == "Darwin" ]]; then
+    open "$outfile"
+else
+    xdg-open "$outfile"
+fi
 
 echo "$infile" | entr -s "cat $infile | uv run main.py > $outfile"
 
