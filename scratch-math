@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+set -e
+set -u
+
+infile="$1"
+outfile="$(mktemp).html"
+
+cat "$infile" | uv run main.py > $outfile
+xdg-open "$outfile"
+
+echo "$infile" | entr -s "cat $infile | uv run main.py > $outfile"
+
